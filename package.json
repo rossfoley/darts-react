@@ -1,0 +1,26 @@
+{
+  "name": "Darts",
+  "description": "Dart scoreboard for scoring games of Cricket",
+  "license": "MIT",
+  "repository": "https://github.com/rossfoley/darts-react",
+  "dependencies": {
+    "coffeeify": "~> 0.6",
+    "immutable": "^3.7.6",
+    "jquery": "^2.2.0",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-redux": "^4.2.1",
+    "redux": "^3.2.1",
+    "redux-thunk": "^1.0.3",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "coffeelint": "^1.12.1"
+  },
+  "scripts": {
+    "lint": "coffeelint app/assets/javascripts"
+  },
+  "engines": {
+    "node": ">= 0.10"
+  }
+}
