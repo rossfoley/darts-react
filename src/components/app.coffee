@@ -1,16 +1,21 @@
 React = require 'react'
 { connect } = require 'react-redux'
 
-{ div } = React.DOM
+ScoreControls = React.createFactory require('./score_controls')
+Scoreboard = React.createFactory require('./scoreboard')
+
+{ div, h1 } = React.DOM
 
 DartsApp = React.createClass
   displayName: 'Darts'
 
   render: ->
     div {},
-      div {}, 'Dart Scoreboard & Stat Tracker'
-      @props.players.map (player) ->
-        div {key: player.get('id')}, player.get 'name'
+      h1 {className: 'middle'}, 'Playing Game'
+      div {id: 'playing-container'},
+        div {id: 'playing'},
+          ScoreControls {}
+          Scoreboard {}
 
 mapStateToProps = (state) ->
   players: state.player.get 'players'
