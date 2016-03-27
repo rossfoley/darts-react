@@ -1,7 +1,7 @@
 React = require 'react'
 { connect } = require 'react-redux'
 
-{ li, ul } = React.DOM
+{ a, li, ul } = React.DOM
 
 ScoreControls = React.createClass
   displayName: 'ScoreControls'
@@ -11,6 +11,8 @@ ScoreControls = React.createClass
       @props.players.map (player, i) =>
         className = if player.get('id') is @props.activePlayerId then 'active-player' else ''
         li {key: player.get('id'), className}, player.get 'name'
+      li {}, a {href: '#', className: 'btn btn-primary', id: 'next-button'}, 'Next Round'
+      li {}, a {href: '#', className: 'btn btn-primary', id: 'finish-game-button'}, 'Finish Game'
 
 mapStateToProps = (state) ->
   players: state.player.get 'players'
