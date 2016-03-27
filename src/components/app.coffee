@@ -1,7 +1,8 @@
 React = require 'react'
 { connect } = require 'react-redux'
 
-ScoreControls = React.createFactory require('./score_controls')
+PlayerOrderList = React.createFactory require('./player_order_list')
+ScoringTable = React.createFactory require('./scoring_table')
 Scoreboard = React.createFactory require('./scoreboard')
 
 { div, h1 } = React.DOM
@@ -14,7 +15,8 @@ DartsApp = React.createClass
       h1 {className: 'middle'}, 'Playing Game'
       div {id: 'playing-container'},
         div {id: 'playing'},
-          ScoreControls {}
+          PlayerOrderList {}
+          ScoringTable {}
           Scoreboard {}
 
 mapStateToProps = (state) ->

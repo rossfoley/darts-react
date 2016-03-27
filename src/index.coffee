@@ -12,7 +12,7 @@ RootReducer = require './reducers/root'
 
 initialState = ->
   player: Immutable.fromJS {players: [{id: 1, name: 'Ross'}]}
-  team: Immutable.fromJS {teams: [{id: 1, name: 'Team Ross'}]}
+  team: Immutable.fromJS {teams: [{id: 1, name: 'Ross'}, {id: 2, name: 'Other'}]}
   round: Immutable.fromJS {rounds: []}
 
 finalCreateStore = compose(
