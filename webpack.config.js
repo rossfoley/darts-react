@@ -3,8 +3,9 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    "webpack-dev-server/client?http://0.0.0.0:8080",
-    'webpack/hot/only-dev-server'
+    'webpack-dev-server/client?http://0.0.0.0:8080',
+    'webpack/hot/only-dev-server',
+    './src/index'
   ],
   devtool: "eval",
   debug: true,
@@ -19,11 +20,10 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {
-    extensions: ['', '.js', '.cjsx', '.coffee']
+    extensions: ['', '.js', '.coffee']
   },
   module: {
     loaders: [
-      { test: /\.cjsx$/, loaders: ['react-hot', 'coffee', 'cjsx']},
       { test: /\.coffee$/, loader: 'coffee' }
     ]
   }
