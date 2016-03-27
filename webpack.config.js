@@ -24,7 +24,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.coffee$/, loader: 'coffee' }
+      { test: /\.coffee$/, loaders: ['react-hot', 'coffee'], include: path.join(__dirname, 'src') }
     ]
   }
 };

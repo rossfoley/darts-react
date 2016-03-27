@@ -5,6 +5,6 @@ React = require 'react'
 DartsApp = React.createClass
   displayName: 'Darts'
   render: ->
-    div {}, 'Hello World'
+    div {}, 'Dart Scoreboard & Stat Tracker'
 
 module.exports = DartsApp
