@@ -3,6 +3,7 @@ Cricket = require '../constants/cricket'
 _ = require 'underscore'
 
 ScoringButtons = React.createFactory require('./scoring_buttons')
+UndoButtons = React.createFactory require('./undo_buttons')
 
 { table, tbody, th, thead, tr } = React.DOM
 
@@ -18,5 +19,6 @@ ScoringTable = React.createClass
       tbody {},
         _.keys(Cricket).map (points) ->
           ScoringButtons {points, key: points}
+        UndoButtons {}
 
 module.exports = ScoringTable
