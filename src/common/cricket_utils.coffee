@@ -33,6 +33,4 @@ CricketUtils =
       ), 0]
     )
 
-
-
 module.exports = CricketUtils
