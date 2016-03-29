@@ -25,6 +25,14 @@ CricketUtils =
       scoreboard
     ), {}
 
+  finalScores: (scoreboard, teams) ->
+    _.object(teams.toArray().map (team) ->
+      [team.get('id'), _.keys(scoreboard).reduce ((acc, points) ->
+        actualTotal = Math.max(0, scoreboard[points][team.get('id')].total - 3)
+        acc + actualTotal * parseInt(points)
+      ), 0]
+    )
+
 
 
 module.exports = CricketUtils

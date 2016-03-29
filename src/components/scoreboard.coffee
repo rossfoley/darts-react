@@ -28,7 +28,7 @@ Scoreboard = React.createClass
       tbody {},
         _.keys(CricketPoints).map (points) =>
           ScoreboardRow {points: points, scoreboard: @props.scoreboard[points], key: points}
-        ScoreboardTotalRow {}
+        ScoreboardTotalRow {scoreboard: @props.scoreboard}
 
 mapStateToProps = (state) ->
   teams: state.team.get 'teams'
