@@ -1,6 +1,7 @@
 React = require 'react'
 CricketPoints = require '../constants/cricket_points'
-_ = require 'underscore'
+RoundActions = require '../actions/round'
+{ connect } = require 'react-redux'
 
 { a, div, td, tr } = React.DOM
 
@@ -11,6 +12,8 @@ ScoringButtons = React.createClass
     return [1, 2] if parseInt(@props.points) is 25
     [1, 2, 3]
 
+  scoreClick: (multiplier) -> (=> @props.score(multiplier))
+
   render: ->
     marks = @availableMarks()
 
@@ -18,7 +21,12 @@ ScoringButtons = React.createClass
       td {}, CricketPoints[@props.points]
       td {},
         div {className: 'btn-group'},
-          marks.map (mark) ->
-            a {className: 'btn btn-primary', key: mark}, "#{mark}x"
+          marks.map (mark) =>
+            a {href: '#', className: 'btn btn-primary', onClick: @scoreClick(mark), key: mark}, "#{mark}x"
 
-module.exports = ScoringButtons
+
+mapDispatchToProps = (dispatch, props) ->
+  score: (multiplier) ->
+    dispatch(RoundActions.score(props.points, multiplier))
+
+module.exports = connect((-> {}), mapDispatchToProps)(ScoringButtons)

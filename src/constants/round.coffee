@@ -1,0 +1,7 @@
+Round =
+  SCORE: 'ROUND_SCORE'
+  NEXT_ROUND: 'NEXT_ROUND'
+  UNDO_ROUND: 'UNDO_ROUND'
+  UNDO_SCORE: 'UNDO_SCORE'
+
+module.exports = Round

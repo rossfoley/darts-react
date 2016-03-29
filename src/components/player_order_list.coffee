@@ -16,6 +16,6 @@ ScoreControls = React.createClass
 
 mapStateToProps = (state) ->
   players: state.player.get 'players'
-  activePlayerId: state.player.get('players').get(0).get 'id'
+  activePlayerId: state.round.get('rounds').last().get('player_id')
 
 module.exports = connect(mapStateToProps)(ScoreControls)
