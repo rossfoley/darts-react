@@ -8,7 +8,7 @@ ScoreboardTotalRow = React.createClass
   displayName: 'ScoreboardTotalRow'
 
   render: ->
-    finalScores = CricketUtils.finalScores(@props.scoreboard, @props.teams)
+    finalScores = CricketUtils.totalScores(@props.scoreboard, @props.teams)
     tr {className: 'score-row'},
       td {},
         div {className: 'right'}, finalScores[@props.teams.get(0).get('id')]
