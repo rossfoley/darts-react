@@ -1,5 +1,5 @@
 React = require 'react'
-Cricket = require '../constants/cricket'
+CricketPoints = require '../constants/cricket_points'
 _ = require 'underscore'
 
 ScoringButtons = React.createFactory require('./scoring_buttons')
@@ -17,7 +17,7 @@ ScoringTable = React.createClass
           th {}, 'Points'
           th {}, 'Score'
       tbody {},
-        _.keys(Cricket).map (points) ->
+        _.keys(CricketPoints).map (points) ->
           ScoringButtons {points, key: points}
         UndoButtons {}
 

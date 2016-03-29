@@ -1,5 +1,5 @@
 React = require 'react'
-Cricket = require '../constants/cricket'
+CricketPoints = require '../constants/cricket_points'
 _ = require 'underscore'
 
 { a, div, td, tr } = React.DOM
@@ -15,7 +15,7 @@ ScoringButtons = React.createClass
     marks = @availableMarks()
 
     tr {},
-      td {}, Cricket[@props.points]
+      td {}, CricketPoints[@props.points]
       td {},
         div {className: 'btn-group'},
           marks.map (mark) ->

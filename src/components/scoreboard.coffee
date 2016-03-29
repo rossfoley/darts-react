@@ -1,5 +1,6 @@
 React = require 'react'
-Cricket = require '../constants/cricket'
+CricketPoints = require '../constants/cricket_points'
+CricketUtils = require '../common/cricket_utils'
 { connect } = require 'react-redux'
 _ = require 'underscore'
 
@@ -12,6 +13,7 @@ Scoreboard = React.createClass
   displayName: 'Scoreboard'
 
   render: ->
+    console.log @props.scoreboard
     table {className: 'table table-bordered table-hover', id: 'show-score-board'},
       colgroup {className: 'team-score'}
       colgroup {className: 'points-column'}
@@ -25,11 +27,12 @@ Scoreboard = React.createClass
           th {},
             div {className: 'left'}, "Team #{@props.teams.get(1).get('name')}"
       tbody {},
-        _.keys(Cricket).map (points) ->
-          ScoreboardRow {points: points, key: points}
+        _.keys(CricketPoints).map (points) =>
+          ScoreboardRow {points: points, scoreboard: @props.scoreboard[points], key: points}
         ScoreboardTotalRow {}
 
 mapStateToProps = (state) ->
   teams: state.team.get 'teams'
+  scoreboard: CricketUtils.computeScoreboard(state.round.get('rounds'), state.team.get('teams'))
 
 module.exports = connect(mapStateToProps)(Scoreboard)

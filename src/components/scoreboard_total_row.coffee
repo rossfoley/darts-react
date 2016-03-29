@@ -1,5 +1,5 @@
 React = require 'react'
-Cricket = require '../constants/cricket'
+CricketPoints = require '../constants/cricket_points'
 { connect } = require 'react-redux'
 
 { div, td, tr } = React.DOM
