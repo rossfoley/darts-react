@@ -18,7 +18,7 @@ CricketUtils =
 
       teamScores = teams.reduce ((teamScore, team) ->
         total = roundTotal(team, rounds, points)
-        teamScore[team.get('id')] = {total, closed: total > 3}
+        teamScore[team.get('id')] = {total, closed: total >= 3}
         teamScore), {}
 
       scoreboard[points] = teamScores

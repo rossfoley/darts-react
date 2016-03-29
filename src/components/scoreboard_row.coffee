@@ -23,17 +23,23 @@ ScoreboardRow = React.createClass
           output.push(span {key: points}, ' |')
         div {}, output
 
+  closedClass: (team) -> if team.closed then 'closed' else ''
+
+  bothClosedClass: (firstTeam, secondTeam) ->
+    if firstTeam.closed and secondTeam.closed then 'both-closed' else ''
+
+
   render: ->
     firstTeam = @props.scoreboard[@props.teams.get(0).get('id')]
     secondTeam = @props.scoreboard[@props.teams.get(1).get('id')]
 
-    tr {},
-      td {},
+    tr {className: @bothClosedClass(firstTeam, secondTeam)},
+      td {className: @closedClass(firstTeam)},
         div {className: 'score-ticks right'},
           @pointsToSymbols(firstTeam.total)
       td {},
         div {className: 'middle'}, CricketPoints[@props.points]
-      td {},
+      td {className: @closedClass(secondTeam)},
         div {className: 'score-ticks left'},
           @pointsToSymbols(secondTeam.total)
 
