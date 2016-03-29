@@ -2,7 +2,7 @@ React = require 'react'
 Cricket = require '../constants/cricket'
 { connect } = require 'react-redux'
 
-{ div, td, tr } = React.DOM
+{ div, span, td, tr } = React.DOM
 
 ScoreboardRow = React.createClass
   displayName: 'ScoreboardRow'
@@ -14,27 +14,25 @@ ScoreboardRow = React.createClass
       when 2 then 'X'
       else
         points -= 3
-        output = String.fromCharCode('9421')
+        output = [span {}, String.fromCharCode('9421')]
         while points >= 5
-          output += '<span class="tally">| | | |</span>'
           points -= 5
+          output.push(span {className: 'tally'}, '| | | |')
         while points > 0
-          output += ' |'
           points--
-        output
+          output.push(span {}, ' |')
+        div {}, output
 
   render: ->
     tr {},
       td {},
-        div
-          className: 'score-ticks right'
-          dangerouslySetInnerHTML: {__html: @pointsToSymbols(@props.teamPoints[@props.teams.get(0).get('id')])}
+        div {className: 'score-ticks right'},
+          @pointsToSymbols(@props.teamPoints[@props.teams.get(0).get('id')])
       td {},
         div {className: 'middle'}, Cricket[@props.points]
       td {},
-        div
-          className: 'score-ticks left'
-          dangerouslySetInnerHTML: {__html: @pointsToSymbols(@props.teamPoints[@props.teams.get(1).get('id')])}
+        div {className: 'score-ticks left'},
+          @pointsToSymbols(@props.teamPoints[@props.teams.get(1).get('id')])
 
 mapStateToProps = (state) ->
   teams: state.team.get 'teams'
