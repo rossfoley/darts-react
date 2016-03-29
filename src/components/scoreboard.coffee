@@ -13,7 +13,6 @@ Scoreboard = React.createClass
   displayName: 'Scoreboard'
 
   render: ->
-    console.log @props.scoreboard
     table {className: 'table table-bordered table-hover', id: 'show-score-board'},
       colgroup {className: 'team-score'}
       colgroup {className: 'points-column'}
