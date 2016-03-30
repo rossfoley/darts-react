@@ -8,6 +8,8 @@ round = (state = initialState, action) ->
   switch action.type
     when SCORE
       # TODO: Add correct scoring validation logic
+      scoreCount = state.get('rounds').last().get('scores').count()
+      return state if scoreCount >= 3
       state.updateIn ['rounds', -1, 'scores'], (scores) ->
         newScore = Immutable.fromJS {points: action.points, multiplier: action.multiplier}
         scores.push newScore
