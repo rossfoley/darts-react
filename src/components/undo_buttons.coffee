@@ -1,4 +1,6 @@
 React = require 'react'
+{ connect } = require 'react-redux'
+RoundActions = require '../actions/round'
 
 { a, td, tr } = React.DOM
 
@@ -8,8 +10,12 @@ UndoButtons = React.createClass
   render: ->
     tr {},
       td {},
-        a {className: 'btn btn-primary'}, 'Undo Round'
+        a {className: 'btn btn-primary', onClick: @props.undoRound}, 'Undo Round'
       td {},
-        a {className: 'btn btn-primary'}, 'Undo Score'
+        a {className: 'btn btn-primary', onClick: @props.undoScore}, 'Undo Score'
 
-module.exports = UndoButtons
+mapDispatchToProps = (dispatch) ->
+  undoRound: -> dispatch(RoundActions.undoRound())
+  undoScore: -> dispatch(RoundActions.undoScore())
+
+module.exports = connect((-> {}), mapDispatchToProps)(UndoButtons)
