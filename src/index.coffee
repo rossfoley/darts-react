@@ -11,8 +11,8 @@ App = React.createFactory require('./components/app')
 RootReducer = require './reducers/root'
 
 initialState = ->
-  player: Immutable.fromJS {players: [{id: 1, name: 'Ross'}, {id: 2, name: 'Bob'}]}
-  team: Immutable.fromJS {teams: [{id: 1, name: 'Ross'}, {id: 2, name: 'Other'}]}
+  player: Immutable.fromJS {players: [{id: 1, name: 'Ross'}, {id: 2, name: 'Will'}]}
+  team: Immutable.fromJS {teams: [{id: 1, name: 'Ross'}, {id: 2, name: 'Will'}]}
   round: Immutable.fromJS {
     rounds: [{player_id: 1, team_id: 1, scores: []}]
     playerOrder: [{player_id: 1, team_id: 1}, {player_id: 2, team_id: 2}]

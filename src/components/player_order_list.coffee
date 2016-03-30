@@ -1,15 +1,22 @@
 React = require 'react'
 { connect } = require 'react-redux'
 RoundActions = require '../actions/round'
+$ = require 'jquery'
 
 { a, li, ul } = React.DOM
 
 ScoreControls = React.createClass
   displayName: 'ScoreControls'
 
+  componentDidMount: ->
+    $(window).keydown (e) =>
+      if e.keyCode is 32
+        e.preventDefault()
+        @props.nextRound()
+
   render: ->
     ul {id: 'player-order-list'},
-      @props.players.map (player, i) =>
+      @props.players.map (player) =>
         className = if player.get('id') is @props.activePlayerId then 'active-player' else ''
         li {key: player.get('id'), className}, player.get 'name'
       li {},
