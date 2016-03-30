@@ -1,5 +1,5 @@
 React = require 'react'
-CricketPoints = require '../constants/cricket_points'
+CricketOrderedPoints = require '../constants/cricket_ordered_points'
 { connect } = require 'react-redux'
 _ = require 'underscore'
 
@@ -25,7 +25,7 @@ Scoreboard = React.createClass
           th {},
             div {className: 'left'}, "Team #{@props.teams.get(1).get('name')}"
       tbody {},
-        _.keys(CricketPoints).map (points) =>
+        CricketOrderedPoints.map (points) =>
           ScoreboardRow {points: points, scoreboard: @props.scoreboard[points], key: points}
         ScoreboardTotalRow {scoreboard: @props.scoreboard}
 
