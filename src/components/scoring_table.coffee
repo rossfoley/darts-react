@@ -17,8 +17,8 @@ ScoringTable = React.createClass
           th {}, 'Points'
           th {}, 'Score'
       tbody {},
-        _.keys(CricketPoints).map (points) ->
-          ScoringButtons {points, key: points}
+        _.keys(CricketPoints).map (points) =>
+          ScoringButtons {points, scoreboard: @props.scoreboard[points], key: points}
         UndoButtons {}
 
 module.exports = ScoringTable

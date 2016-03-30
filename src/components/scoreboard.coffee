@@ -1,6 +1,5 @@
 React = require 'react'
 CricketPoints = require '../constants/cricket_points'
-CricketUtils = require '../common/cricket_utils'
 { connect } = require 'react-redux'
 _ = require 'underscore'
 
@@ -32,6 +31,5 @@ Scoreboard = React.createClass
 
 mapStateToProps = (state) ->
   teams: state.team.get 'teams'
-  scoreboard: CricketUtils.computeScoreboard(state.round.get('rounds'), state.team.get('teams'))
 
 module.exports = connect(mapStateToProps)(Scoreboard)

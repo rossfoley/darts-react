@@ -1,4 +1,6 @@
 React = require 'react'
+CricketUtils = require '../common/cricket_utils'
+{ connect } = require 'react-redux'
 
 PlayerOrderList = React.createFactory require('./player_order_list')
 ScoringTable = React.createFactory require('./scoring_table')
@@ -15,7 +17,10 @@ DartsApp = React.createClass
       div {id: 'playing-container'},
         div {id: 'playing'},
           PlayerOrderList {}
-          ScoringTable {}
-          Scoreboard {}
+          ScoringTable {scoreboard: @props.scoreboard}
+          Scoreboard {scoreboard: @props.scoreboard}
 
-module.exports = DartsApp
+mapStateToProps = (state) ->
+  scoreboard: CricketUtils.computeScoreboard(state.round.get('rounds'), state.team.get('teams'))
+
+module.exports = connect(mapStateToProps)(DartsApp)

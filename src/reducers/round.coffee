@@ -1,4 +1,5 @@
 Immutable = require 'immutable'
+_ = require 'underscore'
 
 { SCORE, NEXT_ROUND, UNDO_ROUND, UNDO_SCORE } = require '../constants/round'
 
@@ -7,11 +8,21 @@ initialState = Immutable.fromJS rounds: [], playerOrder: []
 round = (state = initialState, action) ->
   switch action.type
     when SCORE
-      # TODO: Add correct scoring validation logic
+      # Only allow 3 scores per round
       scoreCount = state.get('rounds').last().get('scores').count()
       return state if scoreCount >= 3
+
+      # Cap the multiplier to the highest legal value
+      currentTeam = state.get('rounds').last().get('team_id')
+      currentTeamScoreboard = action.scoreboard[currentTeam]
+      otherTeamScoreboard = _.values(_.omit(action.scoreboard, currentTeam))[0]
+      return state if currentTeamScoreboard.closed and otherTeamScoreboard.closed
+      multiplier = action.multiplier
+      if otherTeamScoreboard.closed
+        multiplier = Math.min(multiplier, 3 - currentTeamScoreboard.total)
+
       state.updateIn ['rounds', -1, 'scores'], (scores) ->
-        newScore = Immutable.fromJS {points: action.points, multiplier: action.multiplier}
+        newScore = Immutable.fromJS {points: action.points, multiplier: multiplier}
         scores.push newScore
 
     when NEXT_ROUND

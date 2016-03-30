@@ -27,6 +27,6 @@ ScoringButtons = React.createClass
 
 mapDispatchToProps = (dispatch, props) ->
   score: (multiplier) ->
-    dispatch(RoundActions.score(props.points, multiplier))
+    dispatch(RoundActions.score(props.points, multiplier, props.scoreboard))
 
 module.exports = connect((-> {}), mapDispatchToProps)(ScoringButtons)
