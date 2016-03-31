@@ -1,7 +1,6 @@
 React = require 'react'
 CricketOrderedPoints = require '../constants/cricket_ordered_points'
 { connect } = require 'react-redux'
-_ = require 'underscore'
 
 ScoreboardRow = React.createFactory require('./scoreboard_row')
 ScoreboardTotalRow = React.createFactory require('./scoreboard_total_row')

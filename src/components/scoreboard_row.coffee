@@ -19,7 +19,7 @@ ScoreboardRow = React.createClass
           points -= 5
           output.push(span {className: 'tally', key: points}, '| | | |')
         while points > 0
-          points--
+          points -= 1
           output.push(span {key: points}, ' |')
         div {}, output
 

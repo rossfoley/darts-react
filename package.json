@@ -25,7 +25,8 @@
     "lint": "coffeelint src",
     "dev-server": "webpack-dev-server -d --config webpack.config.js --content-base ./public/ --progress --colors",
     "dev-build": "webpack -p --config webpack.config.js --profile --progress --colors",
-    "prod-build": "webpack -p --config webpack.production.config.js --profile --progress --colors"
+    "prod-build": "webpack -p --config webpack.production.config.js --profile --progress --colors",
+    "prod-copy": "npm run prod-build; cp public/bundle.js ~/code/darts/app/assets/javascripts/pages/scoreboard.js"
   },
   "engines": {
     "node": ">= 0.10"

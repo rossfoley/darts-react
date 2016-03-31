@@ -5,6 +5,7 @@ CricketUtils = require '../common/cricket_utils'
 PlayerOrderList = React.createFactory require('./player_order_list')
 ScoringTable = React.createFactory require('./scoring_table')
 Scoreboard = React.createFactory require('./scoreboard')
+PlayerMPRTable = React.createFactory require('./player_mpr_table')
 
 { div, h1 } = React.DOM
 
@@ -19,6 +20,7 @@ DartsApp = React.createClass
           PlayerOrderList {}
           ScoringTable {scoreboard: @props.scoreboard}
           Scoreboard {scoreboard: @props.scoreboard}
+          PlayerMPRTable {}
 
 mapStateToProps = (state) ->
   scoreboard: CricketUtils.computeScoreboard(state.round.get('rounds'), state.team.get('teams'))

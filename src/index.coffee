@@ -10,24 +10,29 @@ Provider = React.createFactory ReactRedux.Provider
 App = React.createFactory require('./components/app')
 RootReducer = require './reducers/root'
 
-initialState = ->
-  player: Immutable.fromJS {players: [{id: 1, name: 'Ross'}, {id: 2, name: 'Will'}]}
-  team: Immutable.fromJS {teams: [{id: 1, name: 'Ross'}, {id: 2, name: 'Will'}]}
-  round: Immutable.fromJS {
-    rounds: [{player_id: 1, team_id: 1, scores: []}]
-    playerOrder: [{player_id: 1, team_id: 1}, {player_id: 2, team_id: 2}]
-  }
+initialState = (data) ->
+  game: Immutable.fromJS data.game
+  player: Immutable.fromJS players: data.players
+  team: Immutable.fromJS teams: data.teams
+  round: Immutable.fromJS rounds: data.rounds, playerOrder: data.playerOrder
 
 finalCreateStore = compose(
   applyMiddleware(Thunk),
   if window.devToolsExtension then window.devToolsExtension() else (x) -> x
-)(createStore);
+)(createStore)
 
 $ ->
   reactRoot = $('#react-root')
 
   if reactRoot.length
-    store = finalCreateStore(RootReducer, initialState())
+    window.onbeforeunload = -> 'Your game has not been saved!'
+
+    csrf = jQuery('meta[name="csrf-token"]').attr('content')
+    localStorage.setItem('csrf-token', csrf)
+
+    data = reactRoot.data 'initial-state'
+    store = finalCreateStore(RootReducer, initialState(data))
+
     ReactDOM.render (
       Provider {store},
         App {}

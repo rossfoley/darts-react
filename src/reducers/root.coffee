@@ -1,13 +1,12 @@
 { combineReducers } = require 'redux'
 
 round = require './round'
-player = require './player'
-team = require './team'
 
 root = combineReducers {
   round
-  player
-  team
+  player: (state = {}) -> state
+  team: (state = {}) -> state
+  game: (state = {}) -> state
 }
 
 module.exports = root
