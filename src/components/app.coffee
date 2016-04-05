@@ -1,6 +1,7 @@
 React = require 'react'
 CricketUtils = require '../common/cricket_utils'
 { connect } = require 'react-redux'
+$ = require 'jquery'
 
 PlayerOrderList = React.createFactory require('./player_order_list')
 ScoringTable = React.createFactory require('./scoring_table')
@@ -11,6 +12,9 @@ PlayerMPRTable = React.createFactory require('./player_mpr_table')
 
 DartsApp = React.createClass
   displayName: 'Darts'
+
+  componentDidUpdate: ->
+    $('.btn').mouseup -> $(@).blur()
 
   render: ->
     div {},
