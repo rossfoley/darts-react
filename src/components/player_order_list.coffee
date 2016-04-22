@@ -4,7 +4,7 @@ RoundActions = require '../actions/round'
 $ = require 'jquery'
 FinishGame = require '../common/finish_game'
 
-{ a, li, ul } = React.DOM
+{ a, table, tbody, th, thead, tr, td } = React.DOM
 
 ScoreControls = React.createClass
   displayName: 'ScoreControls'
@@ -20,13 +20,21 @@ ScoreControls = React.createClass
     FinishGame.submitResults(@props.finishGameState)
 
   render: ->
-    ul {id: 'player-order-list'},
-      @props.players.map (player) =>
-        className = if player.get('id') is @props.activePlayerId then 'active-player' else ''
-        li {key: player.get('id'), className}, player.get 'name'
-      li {},
-        a {href: '#', className: 'btn btn-primary', onClick: @props.nextRound, id: 'next-button'}, 'Next Round'
-      li {}, a {href: '#', className: 'btn btn-primary', onClick: @finishGame, id: 'finish-game-button'}, 'Finish Game'
+    table {id: 'player-order-list', className: 'table table-bordered'},
+      thead {},
+        tr {},
+          th {}, 'Players'
+      tbody {},
+        @props.players.map (player) =>
+          className = if player.get('id') is @props.activePlayerId then 'active-player' else ''
+          tr {key: player.get('id')},
+            td {className}, player.get 'name'
+        tr {className: 'button-row'},
+          td {},
+            a {href: '#', className: 'btn btn-primary', onClick: @props.nextRound, id: 'next-button'}, 'Next Round'
+        tr {className: 'button-row'},
+          td {},
+            a {href: '#', className: 'btn btn-primary', onClick: @finishGame, id: 'finish-game-button'}, 'Finish Game'
 
 mapStateToProps = (state) ->
   players: state.player.get 'players'
