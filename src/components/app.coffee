@@ -10,7 +10,7 @@ ScoringTable = React.createFactory require('./scoring_table')
 Scoreboard = React.createFactory require('./scoreboard')
 PlayerMPRTable = React.createFactory require('./player_mpr_table')
 
-{ div, h1 } = React.DOM
+{ div } = React.DOM
 
 DartsApp = React.createClass
   displayName: 'Darts'
@@ -26,7 +26,6 @@ DartsApp = React.createClass
 
   render: ->
     div {},
-      h1 {className: 'middle'}, 'Playing Game'
       div {id: 'playing-container'},
         div {id: 'playing'},
           PlayerOrderList {}
