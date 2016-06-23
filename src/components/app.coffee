@@ -16,10 +16,10 @@ DartsApp = React.createClass
   displayName: 'Darts'
 
   componentDidMount: ->
-    key 'space', => @props.nextRound()
-    key 'command+z', => @props.undoScore()
-    key 'command+x', => @props.undoRound()
-    key 'command+s', => FinishGame.submitResults(@props.finishGameState)
+    key 'space', => @props.nextRound() and off
+    key 'command+z', => @props.undoScore() and off
+    key 'command+x', => @props.undoRound() and off
+    key 'command+s', => FinishGame.submitResults(@props.finishGameState) and off
 
   componentDidUpdate: ->
     $('.btn').mouseup -> $(@).blur()
