@@ -2,6 +2,9 @@ $ = require 'jquery'
 FinishGame =
   submitResults: (state) ->
     window.onbeforeunload = ->
+    $('#finish-game-button').html('Finishing Game...')
+    $('#finish-game-button').attr('disabled', true)
+
     gameParams = {rounds: state.round.get('rounds').toJS()}
     gameId = state.game.get('id')
     $.ajax
