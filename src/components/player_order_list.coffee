@@ -1,19 +1,12 @@
 React = require 'react'
 { connect } = require 'react-redux'
 RoundActions = require '../actions/round'
-$ = require 'jquery'
 FinishGame = require '../common/finish_game'
 
 { a, table, tbody, th, thead, tr, td } = React.DOM
 
 ScoreControls = React.createClass
   displayName: 'ScoreControls'
-
-  componentDidMount: ->
-    $(window).keydown (e) =>
-      if e.keyCode is 32
-        e.preventDefault()
-        @props.nextRound()
 
   finishGame: (e) ->
     e.preventDefault()
