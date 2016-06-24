@@ -20,7 +20,7 @@ PlayerMPRTable = React.createClass
             th {}, 'MPR'
         tbody {},
           @props.playerMPRs.map (playerMPR) =>
-            tr {},
+            tr {key: playerMPR.name},
               td {}, playerMPR.name
               td {}, @roundMPR(playerMPR.mpr)
 

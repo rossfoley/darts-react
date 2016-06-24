@@ -5,8 +5,8 @@ FinishGame = require '../common/finish_game'
 
 { a, table, tbody, th, thead, tr, td } = React.DOM
 
-ScoreControls = React.createClass
-  displayName: 'ScoreControls'
+PlayerOrderList = React.createClass
+  displayName: 'PlayerOrderList'
 
   finishGame: (e) ->
     e.preventDefault()
@@ -37,4 +37,4 @@ mapStateToProps = (state) ->
 mapDispatchToProps = (dispatch) ->
   nextRound: -> dispatch(RoundActions.nextRound())
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(ScoreControls)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(PlayerOrderList)
