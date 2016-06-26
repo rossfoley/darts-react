@@ -7,6 +7,7 @@ FinishGame = require '../common/finish_game'
 
 KeyboardShortcuts = React.createClass
   displayName: 'KeyboardShortcuts'
+  pointKeys: {5: 15, 6: 16, 7: 17, 8: 18, 9: 19, 0: 20, 1: 25}
 
   componentDidMount: ->
     key 'space', => @props.nextRound() and off
@@ -14,12 +15,27 @@ KeyboardShortcuts = React.createClass
     key 'command+x', => @props.undoRound() and off
     key 'command+enter', => FinishGame.submitResults(@props.finishGameState) and off
 
-#    pointKeys = {5: 15, 6: 16, 7: 17, 8: 18, 9: 19, 0: 20, 1: 25}
-#    for num, points of pointKeys
-#      key "#{num}", => @props.score(points, 1) and off
-#      key "command+#{num}", => @props.score(points, 2) and off
-#      unless points is 25
-#        key "command+shift+#{num}", => @props.score(points, 3) and off
+    for num, points of @pointKeys
+      key "#{num}", @scoreKey
+      key "command+#{num}", @scoreKey
+      key("command+shift+#{num}", @scoreKey) unless points is 25
+
+  scoreKey: (e) ->
+    console.log e
+    console.log @props.scoreboard
+    if @pointKeys[e.key]
+      points = @pointKeys[e.key]
+      if @isTriple e
+        @props.score(points, 3)
+      else if @isDouble e
+        @props.score(points, 2)
+      else
+        @props.score(points, 2)
+      return off
+    on
+
+  isTriple: (e) -> e.metaKey and e.shiftKey
+  isDouble: (e) -> e.metaKey
 
   render: ->
     div {id: 'shortcuts'},
