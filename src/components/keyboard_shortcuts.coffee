@@ -7,22 +7,16 @@ FinishGame = require '../common/finish_game'
 
 KeyboardShortcuts = React.createClass
   displayName: 'KeyboardShortcuts'
-  pointKeys: {5: 15, 6: 16, 7: 17, 8: 18, 9: 19, 0: 20, 1: 25}
+  pointKeys: {'5': '15', '6': '16', '7': '17', '8': '18', '9': '19', '0': '20', '1': '25'}
 
   componentDidMount: ->
     key 'space', => @props.nextRound() and off
     key 'command+z', => @props.undoScore() and off
     key 'command+x', => @props.undoRound() and off
     key 'command+enter', => FinishGame.submitResults(@props.finishGameState) and off
-
-    for num, points of @pointKeys
-      key "#{num}", @scoreKey
-      key "command+#{num}", @scoreKey
-      key("command+shift+#{num}", @scoreKey) unless points is 25
+    $(document).on 'keydown', @scoreKey
 
   scoreKey: (e) ->
-    console.log e
-    console.log @props.scoreboard
     if @pointKeys[e.key]
       points = @pointKeys[e.key]
       if @isTriple e
@@ -34,11 +28,11 @@ KeyboardShortcuts = React.createClass
       return off
     on
 
-  isTriple: (e) -> e.metaKey and e.shiftKey
+  isTriple: (e) -> e.metaKey and e.ctrlKey
   isDouble: (e) -> e.metaKey
 
   render: ->
-    div {id: 'shortcuts'},
+    div {id: 'shortcuts', onKeyPress: @scoreKey},
       hr {}
       dl {className: 'dl-horizontal'},
         dt {}, '5 - 0'
@@ -50,7 +44,7 @@ KeyboardShortcuts = React.createClass
         dt {}, '⌘+point'
         dd {}, 'Score double'
 
-        dt {}, '⌘+⇧+point'
+        dt {}, '⌘+⌃+point'
         dd {}, 'Score triple'
 
         dt {}, 'Space'
