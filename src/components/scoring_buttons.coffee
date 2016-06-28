@@ -2,6 +2,7 @@ React = require 'react'
 CricketPoints = require '../constants/cricket_points'
 RoundActions = require '../actions/round'
 { connect } = require 'react-redux'
+_ = require 'underscore'
 
 { a, div, td, tr } = React.DOM
 
@@ -14,6 +15,15 @@ ScoringButtons = React.createClass
 
   scoreClick: (multiplier) -> (=> @props.score(multiplier))
 
+  btnClass: (mark) ->
+    currentTeamScoreboard = @props.scoreboard[@props.currentTeam]
+    otherTeamScoreboard = _.values(_.omit(@props.scoreboard, @props.currentTeam))[0]
+    if otherTeamScoreboard.closed
+      return 'disabled' if currentTeamScoreboard.closed or (mark + currentTeamScoreboard.total) > 3
+    else
+      return 'btn-success' if currentTeamScoreboard.closed
+    ''
+
   render: ->
     marks = @availableMarks()
 
@@ -22,11 +32,13 @@ ScoringButtons = React.createClass
       td {},
         div {className: 'btn-group'},
           marks.map (mark) =>
-            a {href: '#', className: 'btn btn-primary', onClick: @scoreClick(mark), key: mark}, "#{mark}x"
+            a {href: '#', className: "btn btn-primary #{@btnClass(mark)}", onClick: @scoreClick(mark), key: mark}, "#{mark}x"
 
+mapStateToProps = (state) ->
+  currentTeam: state.round.get('rounds').last().get('team_id')
 
 mapDispatchToProps = (dispatch, props) ->
   score: (multiplier) ->
     dispatch(RoundActions.score(props.points, multiplier, props.scoreboard))
 
-module.exports = connect((-> {}), mapDispatchToProps)(ScoringButtons)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(ScoringButtons)
