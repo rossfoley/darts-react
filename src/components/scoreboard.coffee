@@ -18,11 +18,11 @@ Scoreboard = React.createClass
       thead {},
         tr {},
           th {},
-            div {className: 'right'}, "Team #{@props.teams.get(0).get('name')}"
+            div {className: 'right truncate'}, "Team #{@props.teams.get(0).get('name')}"
           th {},
             div {className: 'middle'}, 'vs.'
           th {},
-            div {className: 'left'}, "Team #{@props.teams.get(1).get('name')}"
+            div {className: 'left truncate'}, "Team #{@props.teams.get(1).get('name')}"
       tbody {},
         CricketOrderedPoints.map (points) =>
           ScoreboardRow {points: points, scoreboard: @props.scoreboard[points], key: points}

@@ -30,7 +30,7 @@ KeyboardShortcuts = React.createClass
       else if @isDouble e
         @props.score(points, 2)
       else
-        @props.score(points, 2)
+        @props.score(points, 1)
       return off
     on
 
