@@ -12,6 +12,13 @@ PlayerOrderList = React.createClass
     e.preventDefault()
     FinishGame.submitResults(@props.finishGameState)
 
+  playerTooltip: (player) ->
+    recentMpr = Math.round(parseFloat(player.get('recent_mpr')) * 100) / 100
+    "Recent MPR: #{recentMpr}"
+
+  componentDidMount: ->
+    $('[data-toggle="tooltip"]').tooltip(container: 'body')
+
   render: ->
     table {id: 'player-order-list', className: 'table table-bordered'},
       thead {},
@@ -21,7 +28,12 @@ PlayerOrderList = React.createClass
         @props.players.map (player) =>
           className = if player.get('id') is @props.activePlayerId then 'active-player' else ''
           tr {key: player.get('id')},
-            td {className}, player.get 'name'
+            td
+              className: className
+              'data-toggle': 'tooltip'
+              'data-placement': 'right'
+              title: @playerTooltip(player),
+              player.get 'name'
         tr {className: 'button-row'},
           td {},
             a {href: '#', className: 'btn btn-primary', onClick: @props.nextRound, id: 'next-button'}, 'Next Round'
