@@ -54,7 +54,7 @@ PlayerOrderList = React.createClass
               onClick: @finishGame,
               'data-toggle': 'tooltip'
               'data-placement': 'right'
-              title: '⌘+Enter',
+              title: '⌘ + Enter',
                 'Finish Game'
 
 mapStateToProps = (state) ->

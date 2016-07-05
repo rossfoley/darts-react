@@ -1,5 +1,6 @@
 React = require 'react'
 CricketPoints = require '../constants/cricket_points'
+Shortcuts = require '../constants/shortcuts'
 RoundActions = require '../actions/round'
 { connect } = require 'react-redux'
 _ = require 'underscore'
@@ -8,6 +9,7 @@ _ = require 'underscore'
 
 ScoringButtons = React.createClass
   displayName: 'ScoringButtons'
+  markModifiers: {1: '', 2: '⌘ + ', 3: '⌘ + ⌃ + '}
 
   availableMarks: ->
     return [1, 2] if parseInt(@props.points) is 25
@@ -24,6 +26,10 @@ ScoringButtons = React.createClass
       return 'btn-success' if currentTeamScoreboard.closed
     ''
 
+  shortcutText: (mark) ->
+    key = _.invert(Shortcuts)[@props.points]
+    @markModifiers[mark] + key
+
   render: ->
     marks = @availableMarks()
 
@@ -32,7 +38,15 @@ ScoringButtons = React.createClass
       td {},
         div {className: 'btn-group'},
           marks.map (mark) =>
-            a {href: '#', className: "btn btn-primary #{@btnClass(mark)}", onClick: @scoreClick(mark), key: mark}, "#{mark}x"
+            a
+              href: '#'
+              className: "btn btn-primary #{@btnClass(mark)}"
+              onClick: @scoreClick(mark)
+              'data-toggle': 'tooltip'
+              'data-placement': 'right'
+              title: @shortcutText(mark)
+              key: mark,
+                "#{mark}x"
 
 mapStateToProps = (state) ->
   currentTeam: state.round.get('rounds').last().get('team_id')

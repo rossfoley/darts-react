@@ -4,7 +4,7 @@ RoundActions = require '../actions/round'
 FinishGame = require '../common/finish_game'
 Shortcuts = require '../constants/shortcuts'
 
-{ dd, div, dl, dt, hr } = React.DOM
+{ div } = React.DOM
 
 KeyboardShortcuts = React.createClass
   displayName: 'KeyboardShortcuts'
@@ -31,33 +31,7 @@ KeyboardShortcuts = React.createClass
   isTriple: (e) -> e.metaKey and e.ctrlKey
   isDouble: (e) -> e.metaKey
 
-  render: ->
-    div {id: 'shortcuts', onKeyPress: @scoreKey},
-      hr {}
-      dl {className: 'dl-horizontal'},
-        dt {}, '5 - 0'
-        dd {}, 'Score single 15-20'
-
-        dt {}, '1'
-        dd {}, 'Score single bull'
-
-        dt {}, '⌘+point'
-        dd {}, 'Score double'
-
-        dt {}, '⌘+⌃+point'
-        dd {}, 'Score triple'
-
-        dt {}, 'Space'
-        dd {}, 'Next Round'
-
-        dt {}, '⌘+z'
-        dd {}, 'Undo Score'
-
-        dt {}, '⌘+x'
-        dd {}, 'Undo Round'
-
-        dt {}, '⌘+enter'
-        dd {}, 'Finish Game'
+  render: -> div {}
 
 mapStateToProps = (state) ->
   finishGameState: state
