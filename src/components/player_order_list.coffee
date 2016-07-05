@@ -33,13 +33,29 @@ PlayerOrderList = React.createClass
               'data-toggle': 'tooltip'
               'data-placement': 'right'
               title: @playerTooltip(player),
-              player.get 'name'
+                player.get 'name'
         tr {className: 'button-row'},
           td {},
-            a {href: '#', className: 'btn btn-primary', onClick: @props.nextRound, id: 'next-button'}, 'Next Round'
+            a
+              href: '#'
+              className: 'btn btn-primary'
+              id: 'next-button'
+              onClick: @props.nextRound,
+              'data-toggle': 'tooltip'
+              'data-placement': 'right'
+              title: 'Space',
+                'Next Round'
         tr {className: 'button-row'},
           td {},
-            a {href: '#', className: 'btn btn-primary', onClick: @finishGame, id: 'finish-game-button'}, 'Finish Game'
+            a
+              href: '#'
+              className: 'btn btn-primary'
+              id: 'finish-game-button'
+              onClick: @finishGame,
+              'data-toggle': 'tooltip'
+              'data-placement': 'right'
+              title: '⌘+Enter',
+                'Finish Game'
 
 mapStateToProps = (state) ->
   players: state.player.get 'players'

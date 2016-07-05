@@ -2,12 +2,12 @@ React = require 'react'
 { connect } = require 'react-redux'
 RoundActions = require '../actions/round'
 FinishGame = require '../common/finish_game'
+Shortcuts = require '../constants/shortcuts'
 
 { dd, div, dl, dt, hr } = React.DOM
 
 KeyboardShortcuts = React.createClass
   displayName: 'KeyboardShortcuts'
-  pointKeys: {'5': '15', '6': '16', '7': '17', '8': '18', '9': '19', '0': '20', '1': '25'}
 
   componentDidMount: ->
     key 'space', => @props.nextRound() and off
@@ -17,8 +17,8 @@ KeyboardShortcuts = React.createClass
     $(document).on 'keydown', @scoreKey
 
   scoreKey: (e) ->
-    if @pointKeys[e.key]
-      points = @pointKeys[e.key]
+    if Shortcuts[e.key]
+      points = Shortcuts[e.key]
       if @isTriple e
         @props.score(points, 3)
       else if @isDouble e
