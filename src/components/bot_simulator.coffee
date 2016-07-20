@@ -20,9 +20,9 @@ BotSimulator = React.createClass
         if botThrow
           @props.score("#{botThrow[0]}", botThrow[1])
         else
-          @makeBotThrow()
+          setTimeout (=> @makeBotThrow()), 500
 
-  componentDidUpdate: -> @makeBotThrow()
+  componentDidUpdate: -> setTimeout (=> @makeBotThrow()), 500
 
   render: -> div {}
 
