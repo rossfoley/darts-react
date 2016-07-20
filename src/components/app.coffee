@@ -8,6 +8,7 @@ ScoringTable = React.createFactory require('./scoring_table')
 Scoreboard = React.createFactory require('./scoreboard')
 PlayerMPRTable = React.createFactory require('./player_mpr_table')
 KeyboardShortcuts = React.createFactory require('./keyboard_shortcuts')
+BotSimulator = React.createFactory require('./bot_simulator')
 
 { div } = React.DOM
 
@@ -26,6 +27,7 @@ DartsApp = React.createClass
           Scoreboard {scoreboard: @props.scoreboard}
           PlayerMPRTable {}
       KeyboardShortcuts {scoreboard: @props.scoreboard}
+      BotSimulator {scoreboard: @props.scoreboard}
 
 mapStateToProps = (state) ->
   scoreboard: CricketUtils.computeScoreboard(state.round.get('rounds'), state.team.get('teams'))

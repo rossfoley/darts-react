@@ -32,14 +32,12 @@ round = (state = initialState, action) ->
         player.get('player_id') is currentPersonId
       newIndex = (currentIndex + 1) % state.get('playerOrder').count()
       nextPlayerData = state.get('playerOrder').get(newIndex)
-      newState = state.updateIn ['rounds'], (rounds) ->
+      state.updateIn ['rounds'], (rounds) ->
         newRound =
           player_id: nextPlayerData.get('player_id')
           team_id: nextPlayerData.get('team_id')
           scores: []
         rounds.push(Immutable.fromJS(newRound))
-      return newState unless nextPlayerData.get('bot')
-      simulateBot(nextPlayerData, newState)
 
 
     when UNDO_ROUND

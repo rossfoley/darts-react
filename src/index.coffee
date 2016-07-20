@@ -32,6 +32,7 @@ $ ->
 
     data = reactRoot.data 'initial-state'
     store = finalCreateStore(RootReducer, initialState(data))
+    localStorage.setItem('bot-throws', 0)
 
     ReactDOM.render (
       Provider {store},
