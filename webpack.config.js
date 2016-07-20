@@ -3,8 +3,6 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://0.0.0.0:8080',
-    'webpack/hot/only-dev-server',
     './src/index'
   ],
   devtool: "eval",
@@ -16,9 +14,6 @@ module.exports = {
   resolveLoader: {
     modulesDirectories: ['node_modules']
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
   resolve: {
     extensions: ['', '.js', '.coffee']
   },

@@ -45,21 +45,23 @@ PlayerOrderList = React.createClass
               'data-placement': 'right'
               title: 'Space',
                 'Next Round'
-        tr {className: 'button-row'},
-          td {},
-            a
-              href: '#'
-              className: 'btn btn-primary'
-              id: 'finish-game-button'
-              onClick: @finishGame,
-              'data-toggle': 'tooltip'
-              'data-placement': 'right'
-              title: '⌘ + Enter',
-                'Finish Game'
+        unless @props.training
+          tr {className: 'button-row'},
+            td {},
+              a
+                href: '#'
+                className: 'btn btn-primary'
+                id: 'finish-game-button'
+                onClick: @finishGame,
+                'data-toggle': 'tooltip'
+                'data-placement': 'right'
+                title: '⌘ + Enter',
+                  'Finish Game'
 
 mapStateToProps = (state) ->
   players: state.player.get 'players'
   activePlayerId: state.round.get('rounds').last().get('player_id')
+  training: state.game.get('training')
   finishGameState: state
 
 mapDispatchToProps = (dispatch) ->
