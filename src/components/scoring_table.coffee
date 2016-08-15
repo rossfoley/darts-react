@@ -11,7 +11,7 @@ ScoringTable = React.createClass
   displayName: 'ScoringTable'
 
   render: ->
-    div {id: 'scoring-table', className: 'col s4'},
+    div {id: 'scoring-table'},
       table {className: 'bordered highlight'},
         thead {},
           tr {},

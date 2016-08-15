@@ -20,7 +20,7 @@ PlayerOrderList = React.createClass
     $('[data-toggle="tooltip"]').tooltip(container: 'body')
 
   render: ->
-    div {id: 'player-order-list', className: 'col s2'},
+    div {id: 'player-order-list'},
       table {className: 'bordered'},
         thead {},
           tr {},

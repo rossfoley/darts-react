@@ -6,14 +6,14 @@ CricketUtils = require '../common/cricket_utils'
 ScoreboardRow = React.createFactory require('./scoreboard_row')
 ScoreboardTotalRow = React.createFactory require('./scoreboard_total_row')
 
-{ div, colgroup, table, tbody, th, thead, tr } = React.DOM
+{ div, table, tbody, th, thead, tr } = React.DOM
 
 Scoreboard = React.createClass
   displayName: 'Scoreboard'
 
   render: ->
     finalScores = CricketUtils.totalScores(@props.scoreboard, @props.teams)
-    div {id: 'show-score-board', className: 'col s6'},
+    div {id: 'show-score-board'},
       table {className: 'bordered highlight'},
         thead {},
           tr {},

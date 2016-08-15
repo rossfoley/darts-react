@@ -20,12 +20,15 @@ ScoreboardRow = React.createClass
       else
         points -= 3
         output = [span {key: points}, String.fromCharCode('9421')]
-        while points >= 5
-          points -= 5
-          output.push(span {className: 'tally', key: points}, '| | | |')
-        while points > 0
-          points -= 1
-          output.push(span {key: points}, ' |')
+        if points > 10
+          output.push(span {}, " #{points}")
+        else
+          while points >= 5
+            points -= 5
+            output.push(span {className: 'tally', key: points}, '| | | |')
+          while points > 0
+            points -= 1
+            output.push(span {key: points}, ' |')
         div {}, output
 
   closedClass: (team) -> if team.closed then 'closed' else ''
