@@ -3,7 +3,7 @@ React = require 'react'
 RoundActions = require '../actions/round'
 FinishGame = require '../common/finish_game'
 
-{ a, table, tbody, th, thead, tr, td } = React.DOM
+{ a, div, table, tbody, th, thead, tr, td } = React.DOM
 
 PlayerOrderList = React.createClass
   displayName: 'PlayerOrderList'
@@ -20,43 +20,44 @@ PlayerOrderList = React.createClass
     $('[data-toggle="tooltip"]').tooltip(container: 'body')
 
   render: ->
-    table {id: 'player-order-list', className: 'table table-bordered'},
-      thead {},
-        tr {},
-          th {}, 'Players'
-      tbody {},
-        @props.players.map (player) =>
-          className = if player.get('id') is @props.activePlayerId then 'active-player' else ''
-          tr {key: player.get('id')},
-            td
-              className: className
-              'data-toggle': 'tooltip'
-              'data-placement': 'right'
-              title: @playerTooltip(player),
-                player.get 'name'
-        tr {className: 'button-row'},
-          td {},
-            a
-              href: '#'
-              className: 'btn btn-primary'
-              id: 'next-button'
-              onClick: @props.nextRound,
-              'data-tip': 'Space'
-              'data-place': 'right'
-              title: 'Space',
-                'Next Round'
-        unless @props.training
+    div {id: 'player-order-list', className: 'col s2'},
+      table {className: 'bordered'},
+        thead {},
+          tr {},
+            th {}, 'Players'
+        tbody {},
+          @props.players.map (player) =>
+            className = if player.get('id') is @props.activePlayerId then 'active-player' else ''
+            tr {key: player.get('id')},
+              td
+                className: className
+                'data-tip': @playerTooltip(player),
+                'data-place': 'right'
+                title: @playerTooltip(player),
+                  player.get 'name'
           tr {className: 'button-row'},
             td {},
               a
                 href: '#'
-                className: 'btn btn-primary'
-                id: 'finish-game-button'
-                onClick: @finishGame,
-                'data-tip': '⌘ + Enter'
+                className: 'btn btn-small'
+                id: 'next-button'
+                onClick: @props.nextRound,
+                'data-tip': 'Space'
                 'data-place': 'right'
-                title: '⌘ + Enter',
-                  'Finish Game'
+                title: 'Space',
+                  'Next Round'
+          unless @props.training
+            tr {className: 'button-row'},
+              td {},
+                a
+                  href: '#'
+                  className: 'btn btn-small'
+                  id: 'finish-game-button'
+                  onClick: @finishGame,
+                  'data-tip': '⌘ + Enter'
+                  'data-place': 'right'
+                  title: '⌘ + Enter',
+                    'Finish Game'
 
 mapStateToProps = (state) ->
   players: state.player.get 'players'

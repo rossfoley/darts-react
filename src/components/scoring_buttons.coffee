@@ -40,7 +40,7 @@ ScoringButtons = React.createClass
           marks.map (mark) =>
             a
               href: '#'
-              className: "btn btn-primary #{@btnClass(mark)}"
+              className: "btn btn-small #{@btnClass(mark)}"
               onClick: @scoreClick(mark)
               'data-tip': @shortcutText(mark)
               'data-place': 'right'

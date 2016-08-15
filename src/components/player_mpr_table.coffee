@@ -13,7 +13,7 @@ PlayerMPRTable = React.createClass
   render: ->
     div {className: 'clearfix'},
       hr {}
-      table {className: 'table table-hover table-striped'},
+      table {className: 'bordered highlight'},
         thead {},
           tr {},
             th {}, 'Player'

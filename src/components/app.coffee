@@ -22,11 +22,11 @@ DartsApp = React.createClass
   render: ->
     div {},
       div {id: 'playing-container'},
-        div {id: 'playing'},
+        div {id: 'playing', className: 'row'},
           PlayerOrderList {}
           ScoringTable {scoreboard: @props.scoreboard}
           Scoreboard {scoreboard: @props.scoreboard}
-          PlayerMPRTable {}
+        PlayerMPRTable {}
       KeyboardShortcuts {scoreboard: @props.scoreboard}
       BotSimulator {scoreboard: @props.scoreboard}
       ReactTooltip {}

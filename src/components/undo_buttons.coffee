@@ -12,20 +12,18 @@ UndoButtons = React.createClass
       td {},
         a
           href: '#'
-          className: 'btn btn-primary'
+          className: 'btn btn-small'
           onClick: @props.undoRound,
-          'data-toggle': 'tooltip'
-          'data-placement': 'right'
-          title: '⌘ + x',
+          'data-tip': '⌘ + x',
+          'data-place': 'right',
             'Undo Round'
       td {},
         a
           href: '#'
-          className: 'btn btn-primary'
+          className: 'btn btn-small'
           onClick: @props.undoScore,
-          'data-toggle': 'tooltip'
-          'data-placement': 'right'
-          title: '⌘ + z',
+          'data-tip': '⌘ + z',
+          'data-place': 'right',
             'Undo Score'
 
 mapDispatchToProps = (dispatch) ->

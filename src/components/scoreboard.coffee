@@ -13,23 +13,20 @@ Scoreboard = React.createClass
 
   render: ->
     finalScores = CricketUtils.totalScores(@props.scoreboard, @props.teams)
-
-    table {className: 'bordered highlight', id: 'show-score-board'},
-      colgroup {className: 'team-score'}
-      colgroup {className: 'points-column'}
-      colgroup {className: 'team-score'}
-      thead {},
-        tr {},
-          th {},
-            div {className: 'right truncate'}, @props.teams.get(0).get('name')
-          th {},
-            div {className: 'middle'}, 'vs.'
-          th {},
-            div {className: 'left truncate'}, @props.teams.get(1).get('name')
-      tbody {},
-        CricketOrderedPoints.map (points) =>
-          ScoreboardRow {points: points, scoreboard: @props.scoreboard[points], finalScores, key: points}
-        ScoreboardTotalRow {finalScores}
+    div {id: 'show-score-board', className: 'col s6'},
+      table {className: 'bordered highlight'},
+        thead {},
+          tr {},
+            th {},
+              div {className: 'right truncate'}, @props.teams.get(0).get('name')
+            th {},
+              div {className: 'middle'}, 'vs.'
+            th {},
+              div {className: 'left truncate'}, @props.teams.get(1).get('name')
+        tbody {},
+          CricketOrderedPoints.map (points) =>
+            ScoreboardRow {points: points, scoreboard: @props.scoreboard[points], finalScores, key: points}
+          ScoreboardTotalRow {finalScores}
 
 mapStateToProps = (state) ->
   teams: state.team.get 'teams'
