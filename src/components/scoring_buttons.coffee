@@ -42,8 +42,8 @@ ScoringButtons = React.createClass
               href: '#'
               className: "btn btn-primary #{@btnClass(mark)}"
               onClick: @scoreClick(mark)
-              'data-toggle': 'tooltip'
-              'data-placement': 'right'
+              'data-tip': @shortcutText(mark)
+              'data-place': 'right'
               title: @shortcutText(mark)
               key: mark,
                 "#{mark}x"

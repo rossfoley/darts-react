@@ -1,11 +1,8 @@
 React = require 'react'
-ReactBootstrap = require 'react-bootstrap'
 CricketPoints = require '../constants/cricket_points'
 { connect } = require 'react-redux'
 
 { div, span, td, tr } = React.DOM
-OverlayTrigger = React.createFactory(ReactBootstrap.OverlayTrigger)
-Tooltip = React.createFactory(ReactBootstrap.Tooltip)
 
 ScoreboardRow = React.createClass
   displayName: 'ScoreboardRow'
@@ -36,33 +33,43 @@ ScoreboardRow = React.createClass
   bothClosedClass: ->
     if @firstTeam().closed and @secondTeam().closed then 'both-closed' else ''
 
-  tooltipText: (teamId, otherTeamId) ->
+  tooltip: (teamId, otherTeamId) ->
     teamPoints = @props.scoreboard[teamId]
     otherTeamPoints = @props.scoreboard[otherTeamId]
     teamScore = @props.finalScores[teamId]
     otherTeamScore = @props.finalScores[otherTeamId]
 
     return 'Closed' if teamPoints.closed and otherTeamPoints.closed
-    if teamPoints.total < 3
-      "#{3 - teamPoints.total} to close"
+    if teamScore >= otherTeamScore
+      if teamPoints.closed
+        'Open to score'
+      else
+        "#{3 - teamPoints.total} to close"
     else
-      return 'Open to score' if teamScore >= otherTeamScore
-      needed = Math.ceil((otherTeamScore - teamScore) / parseInt(@props.points))
-      "#{needed} to gain lead"
-
-  tooltip: (teamId, otherTeamId) ->
-    Tooltip {id: 'tooltip'}, @tooltipText(teamId, otherTeamId)
+      if otherTeamPoints.closed
+        "#{3 - teamPoints.total} to close"
+      else
+        messages = []
+        messages.push("#{3 - teamPoints.total} to close") unless teamPoints.closed
+        toClose = Math.max(0, 3 - teamPoints.total)
+        needed = Math.ceil((otherTeamScore - teamScore) / parseInt(@props.points)) + toClose
+        messages.push "#{needed} to gain lead"
+        messages.join ', '
 
   render: ->
     tr {className: @bothClosedClass()},
-      OverlayTrigger {placement: 'right', overlay: @tooltip(@firstTeamId(), @secondTeamId())},
-        td {className: @closedClass(@firstTeam())},
+      td
+        className: @closedClass(@firstTeam())
+        'data-tip': @tooltip(@firstTeamId(), @secondTeamId())
+        'data-place': 'right',
           div {className: 'score-ticks right'},
             @pointsToSymbols(@firstTeam().total)
       td {},
         div {className: 'middle'}, CricketPoints[@props.points]
-      OverlayTrigger {placement: 'left', overlay: @tooltip(@secondTeamId(), @firstTeamId())},
-        td {className: @closedClass(@secondTeam())},
+      td
+        className: @closedClass(@secondTeam())
+        'data-tip': @tooltip(@secondTeamId(), @firstTeamId())
+        'data-place': 'left',
           div {className: 'score-ticks left'},
             @pointsToSymbols(@secondTeam().total)
 

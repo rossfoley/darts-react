@@ -2,6 +2,7 @@ React = require 'react'
 CricketUtils = require '../common/cricket_utils'
 { connect } = require 'react-redux'
 $ = require 'jquery'
+ReactTooltip = React.createFactory require('react-tooltip')
 
 PlayerOrderList = React.createFactory require('./player_order_list')
 ScoringTable = React.createFactory require('./scoring_table')
@@ -28,6 +29,7 @@ DartsApp = React.createClass
           PlayerMPRTable {}
       KeyboardShortcuts {scoreboard: @props.scoreboard}
       BotSimulator {scoreboard: @props.scoreboard}
+      ReactTooltip {}
 
 mapStateToProps = (state) ->
   scoreboard: CricketUtils.computeScoreboard(state.round.get('rounds'), state.team.get('teams'))

@@ -41,8 +41,8 @@ PlayerOrderList = React.createClass
               className: 'btn btn-primary'
               id: 'next-button'
               onClick: @props.nextRound,
-              'data-toggle': 'tooltip'
-              'data-placement': 'right'
+              'data-tip': 'Space'
+              'data-place': 'right'
               title: 'Space',
                 'Next Round'
         unless @props.training
@@ -53,8 +53,8 @@ PlayerOrderList = React.createClass
                 className: 'btn btn-primary'
                 id: 'finish-game-button'
                 onClick: @finishGame,
-                'data-toggle': 'tooltip'
-                'data-placement': 'right'
+                'data-tip': '⌘ + Enter'
+                'data-place': 'right'
                 title: '⌘ + Enter',
                   'Finish Game'
 

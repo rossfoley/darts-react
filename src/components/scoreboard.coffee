@@ -14,7 +14,7 @@ Scoreboard = React.createClass
   render: ->
     finalScores = CricketUtils.totalScores(@props.scoreboard, @props.teams)
 
-    table {className: 'table table-bordered table-hover', id: 'show-score-board'},
+    table {className: 'bordered highlight', id: 'show-score-board'},
       colgroup {className: 'team-score'}
       colgroup {className: 'points-column'}
       colgroup {className: 'team-score'}
