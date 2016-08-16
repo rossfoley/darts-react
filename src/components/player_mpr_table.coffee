@@ -3,7 +3,7 @@ React = require 'react'
 
 PlayerMPR = require '../common/player_mpr'
 
-{ div, hr, table, tbody, thead, td, th, tr } = React.DOM
+{ div, table, tbody, thead, td, th, tr } = React.DOM
 
 PlayerMPRTable = React.createClass
   displayName: 'PlayerMPRTable'
@@ -12,7 +12,6 @@ PlayerMPRTable = React.createClass
 
   render: ->
     div {className: 'clearfix'},
-      hr {}
       table {className: 'bordered highlight'},
         thead {},
           tr {},
